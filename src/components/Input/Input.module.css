@@ -32,3 +32,14 @@
     background-color: transparent;
     transform: translateY(-120%) scale(0.8);
 }
+
+@media (max-width: 768px) {
+    .input {
+        padding: 10px 20px;
+    }
+
+    .input,
+    .inputLabel {
+        font-size: 18px;
+    }
+}

@@ -8,32 +8,40 @@
     appearance: none;
 }
 
-.greeting {
+.greeting,
+.auth {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: $accent-color;
     min-height: 100vh;
+
+    .container {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
 }
 
-.greeting-main {
-    // @extend %neumorphic-main-page;
-    display: flex;
-    justify-content: center;
-    padding: 70px 0;
+.greeting__inner,
+.auth__inner {
+    @extend %neumorphic-main-page;
+    border-radius: 40px;
+    overflow: auto;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .greeting-info,
-.greeting-auth {
+.auth-block {
     width: 100%;
-    border-radius: 40px;
 }
 
 .greeting-info {
     background-color: $blue-color;
-    // @extend %neumorphic-dark-blue;
+    @extend %neumorphic-dark-blue;
+    z-index: 10;
     padding: 40px;
-    padding-bottom: 100px;
 
     &__img {
         height: 585px;
@@ -47,15 +55,29 @@
     }
 
     &__title {
-        margin: 30px 0 10px 0;
+        margin-top: 30px;
     }
 
     &__text {
+        margin: 30px 0;
         text-align: justify;
+
+    }
+
+    &__btns {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+
+        @media (max-width: 756px) {
+            align-items: baseline;
+            flex-direction: column;
+        }
     }
 }
 
-.greeting-auth {
+.auth-block {
     padding: 80px 40px;
     background-color: $dark-blue-color;
     display: flex;
@@ -63,8 +85,6 @@
 }
 
 .auth-form {
-    margin-top: 40px;
-
     &__title {
         text-align: center;
     }
@@ -95,39 +115,6 @@
         margin-top: 40px;
     }
 
-    &__btn {
-        padding: 20px;
-        text-align: center;
-        width: 100%;
-        border-radius: 30px;
-        background-color: $blue-color;
-        color: $accent-color;
-        @extend %sofia-400;
-        font-size: 28px;
-        border: none;
-
-        &--main {
-            background-color: $accent-color;
-            color: $blue-color;
-        }
-
-        &::before {
-            background-color: $white-color;
-        }
-
-        &:disabled {
-            filter: grayscale(1);
-        }
-
-        &:not(:disabled):hover {
-            color: $dark-blue-color;
-
-            &::before {
-                width: 100%;
-            }
-        }
-    }
-
     &__inputs,
     &__btns {
         display: flex;
@@ -138,5 +125,11 @@
     &__btn,
     &__input {
         @extend %neumorphic-dark-blue-elem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .greeting-info {
+        padding: 30px;
     }
 }
