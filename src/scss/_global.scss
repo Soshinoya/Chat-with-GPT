@@ -1,0 +1,35 @@
+html,
+body {
+    height: 100%;
+}
+
+.main {
+    flex-grow: 1;
+}
+
+body {
+    font-size: 18px;
+    line-height: 25px;
+    color: $white-color;
+    background-color: $dark-blue-color;
+    @extend %myriad-300;
+    display: flex;
+    flex-direction: column;
+}
+
+// .container {
+//     max-width: 1770px;
+//     margin: 0 auto;
+//     padding: 0 15px;
+// }
+
+.title {
+    @extend %sofia-500;
+    letter-spacing: -0.05em;
+    color: $accent-color;
+}
+
+h1 {
+    font-size: 44px;
+    line-height: 56px;
+}

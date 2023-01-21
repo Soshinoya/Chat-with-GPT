@@ -1,0 +1,41 @@
+$accent-color: #FBB829;
+$blue-color: #2E3A51;
+$dark-blue-color: #26303F;
+$white-color: #fff;
+
+%myriad-300 {
+    font-family: 'Myriad Pro';
+    font-weight: 300;
+}
+
+%myriad-400 {
+    font-family: 'Myriad Pro';
+    font-weight: 400;
+}
+
+%sofia-400 {
+    font-family: 'Sofia Pro';
+    font-weight: 400;
+}
+
+%sofia-500 {
+    font-family: 'Sofia Pro';
+    font-weight: 500;
+}
+
+%sofia-700 {
+    font-family: 'Sofia Pro';
+    font-weight: 700;
+}
+
+%neumorphic-main-page {
+    box-shadow: 50px 50px 90px rgba(0, 0, 0, 0.6);
+}
+
+%neumorphic-dark-blue {
+    box-shadow: -20px 20px 40px rgba(28, 35, 49, 0.2), 20px -20px 40px rgba(28, 35, 49, 0.2), -20px -20px 40px rgba(64, 81, 113, 0.9), 20px 20px 50px rgba(28, 35, 49, 0.9), inset 1px 1px 2px rgba(64, 81, 113, 0.3), inset -1px -1px 2px rgba(28, 35, 49, 0.5);
+}
+
+%neumorphic-dark-blue-elem {
+    box-shadow: 20px 20px 25px rgba(0, 0, 0, 0.3);
+}
