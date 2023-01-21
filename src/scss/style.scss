@@ -7,3 +7,136 @@
 * {
     appearance: none;
 }
+
+.greeting {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $accent-color;
+    min-height: 100vh;
+}
+
+.greeting-main {
+    // @extend %neumorphic-main-page;
+    display: flex;
+    justify-content: center;
+    padding: 70px 0;
+}
+
+.greeting-info,
+.greeting-auth {
+    width: 100%;
+    border-radius: 40px;
+}
+
+.greeting-info {
+    background-color: $blue-color;
+    // @extend %neumorphic-dark-blue;
+    padding: 40px;
+    padding-bottom: 100px;
+
+    &__img {
+        height: 585px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+    }
+
+    &__title {
+        margin: 30px 0 10px 0;
+    }
+
+    &__text {
+        text-align: justify;
+    }
+}
+
+.greeting-auth {
+    padding: 80px 40px;
+    background-color: $dark-blue-color;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form {
+    margin-top: 40px;
+
+    &__title {
+        text-align: center;
+    }
+
+    &__inputs {
+        margin-top: 40px;
+    }
+
+    &__input {
+        color: $white-color;
+        background-color: $blue-color;
+    }
+
+    &__input:focus {
+        border: 1.5px solid $accent-color;
+    }
+
+    &__input:focus~label,
+    &__input:valid~label {
+        color: $accent-color;
+    }
+
+    &__label {
+        @extend %myriad-300;
+    }
+
+    &__btns {
+        margin-top: 40px;
+    }
+
+    &__btn {
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        border-radius: 30px;
+        background-color: $blue-color;
+        color: $accent-color;
+        @extend %sofia-400;
+        font-size: 28px;
+        border: none;
+
+        &--main {
+            background-color: $accent-color;
+            color: $blue-color;
+        }
+
+        &::before {
+            background-color: $white-color;
+        }
+
+        &:disabled {
+            filter: grayscale(1);
+        }
+
+        &:not(:disabled):hover {
+            color: $dark-blue-color;
+
+            &::before {
+                width: 100%;
+            }
+        }
+    }
+
+    &__inputs,
+    &__btns {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    &__btn,
+    &__input {
+        @extend %neumorphic-dark-blue-elem;
+    }
+}

@@ -1,0 +1,18 @@
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: .3s;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
