@@ -72,6 +72,16 @@ h1 {
     }
 }
 
+.error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: red;
+    @extend %sofia-700;
+}
+
 @media (max-width: 768px) {
     .button {
         font-size: 22px;

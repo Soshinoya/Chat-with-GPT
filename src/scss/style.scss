@@ -128,6 +128,59 @@
     }
 }
 
+.custom-modal {
+    padding: 30px;
+
+    &__title.title {
+        font-size: 36px;
+        text-align: justify;
+        @extend %sofia-400;
+    }
+}
+
+.modal-window {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 100%;
+    height: 80%;
+    border-radius: 40px;
+    border: 5px solid $black-color;
+    background-color: $dark-blue-color;
+    padding: 30px;
+}
+
+.modal-header {
+    padding: 30px;
+    border-bottom: 5px solid $black-color;
+}
+
+.modal-footer {
+    gap: 20px;
+}
+
+h1.modal-title {
+    color: $accent-color;
+    font-size: 44px;
+    @extend %sofia-400;
+}
+
+.modal-button {
+    background-color: $accent-color;
+    max-width: 150px;
+    width: 100%;
+    color: $black-color;
+    border: 5px solid $black-color;
+    padding: 15px 0;
+    font-size: 22px;
+    @extend %sofia-700;
+}
+
+.modal-close {
+    font-size: 44px;
+    color: $accent-color;
+}
+
 @media (max-width: 1200px) {
     .greeting-info {
         padding: 30px;

@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
 import Login from './components/Login'
 import Register from './components/Register'
+import Chat from './components/Chat'
 
 import './scss/style.scss'
 
@@ -16,6 +17,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
+            <Route path='chat' element={<Chat />} />
           </Route>
         </Routes>
       </div>

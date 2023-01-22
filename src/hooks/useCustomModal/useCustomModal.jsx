@@ -1,5 +1,4 @@
 import Modal from './Modal'
-import './bootstrap.min.css'
 import './modal.css'
 
 const useCustomModal = options => {

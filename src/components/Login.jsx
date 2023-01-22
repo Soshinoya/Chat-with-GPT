@@ -1,7 +1,8 @@
 import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import Input from "./Input/Input"
 import Button from "./Button/Button"
-import { Link } from "react-router-dom"
+import Auth from "../service/auth"
 
 const Login = () => {
     const [isDisabled, setIsDisabled] = useState({
@@ -9,12 +10,19 @@ const Login = () => {
         "password": false
     })
 
+    const navigate = useNavigate()
+
+    const submitHandler = e => {
+        Auth.loginHandler(e)
+            .then(res => res && navigate('/chat'))
+    }
+
     return (
         <section className="auth">
             <div className="container">
                 <div className="auth__inner">
                     <div className="auth-block">
-                        <form className="auth-form">
+                        <form className="auth-form" onSubmit={submitHandler}>
                             <h1 className="title auth-form__title">Login</h1>
                             <div className="auth-form__inputs">
                                 <Input isDisabled={isDisabled} setIsDisabled={setIsDisabled} type="email" name="email" required>email</Input>

@@ -33,7 +33,7 @@ function _createModalFooter(buttons = []) {
     const wrap = (
         <div className="modal-footer">
             {buttons.map((btn, index) => {
-                return <button className={`btn btn-${btn.type || 'secondary'}`} onClick={e => listener(e, btn.afterClick)} key={index}>{btn.text}</button>
+                return <button className={`button modal-button`} onClick={e => listener(e, btn.afterClick)} key={index}>{btn.text}</button>
             })}
         </div>
     )
@@ -42,8 +42,6 @@ function _createModalFooter(buttons = []) {
 }
 
 const Modal = ({ width, title, closable, content, footerButtons }) => {
-
-    const DEFAULT_WIDTH = '600px'
 
     const modalInDOM = useRef()
     globalModalInDOM = modalInDOM
@@ -54,9 +52,9 @@ const Modal = ({ width, title, closable, content, footerButtons }) => {
         modalJSX: (
             <div className='vmodal' ref={modalInDOM} onClick={listener}>
                 <div className="modal-overlay" data-close="true">
-                    <div className="modal-window" style={{ width: width || DEFAULT_WIDTH }}>
+                    <div className="modal-window">
                         <div className="modal-header">
-                            <span className="modal-title">{title || 'Окно'}</span>
+                            <h1 className="modal-title title">{title || 'Окно'}</h1>
                             {closable ? <span className="modal-close" data-close="true">&times;</span> : ''}
                         </div>
                         <div className="modal-body" data-content>
