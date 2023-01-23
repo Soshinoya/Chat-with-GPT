@@ -1,7 +1,7 @@
 import { getDatabase, ref, onValue, update } from 'firebase/database';
 
 export default class ChatService {
-    static getMessages() {
+    static getData() {
         const user = localStorage.getItem('user')
         if (user) {
             const { uid } = JSON.parse(user)
@@ -43,7 +43,7 @@ export default class ChatService {
             const { Configuration, OpenAIApi } = require('openai');
 
             const configuration = new Configuration({
-                apiKey: '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',
+                apiKey: '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',
             });
             const openai = new OpenAIApi(configuration);
 

@@ -274,6 +274,7 @@ h1.modal-title {
     .message {
         width: 100%;
         color: $white-color;
+        margin-bottom: 30px;
 
         &__inner {
             display: flex;
@@ -371,5 +372,66 @@ h1.modal-title {
 @media (max-width: 1200px) {
     .greeting-info {
         padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat {
+        .container {
+            padding: 0;
+        }
+
+        &__inner {
+            height: 100vh;
+            border-radius: 0;
+        }
+    }
+
+    .chat-header {
+        &__img {
+            height: 50px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &__line {
+            display: none;
+        }
+    }
+
+    .chat-main {
+        .message {
+            &__text {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .chat-footer {
+        &__btn {
+            width: 50px;
+            height: 50px;
+        }
+
+        &__img {
+            width: auto;
+            height: auto;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .chat-header,
+    .chat-main,
+    .chat-footer {
+        padding: 10px;
     }
 }

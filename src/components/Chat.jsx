@@ -16,24 +16,25 @@ const Chat = () => {
 
     const [data, setData] = useState({})
 
+    const [messages, setMessages] = useState([])
+
     useEffect(() => {
         // Если в новом браузере открыть страницу /chat выводиться underfined, underfined
-        ChatService.getMessages().then(setData)
+        ChatService.getData()
+            .then(data => {
+                setData(data)
+                return data.messages
+            })
+            .then(messages => messages && setMessages(Object.values(messages)))
     }, [])
+
+    console.log(messages)
 
     const submitHandler = e => {
         e.preventDefault()
-        const date1 = Date.now()
-        data.messages.date1 = { from: 'me', content: e.target.elements.text.value }
-        setData({ ...data })
+        setMessages([...messages, { from: 'me', content: e.target.elements.text.value }])
         ChatService.onSubmit(e)
-            .then(resObjects => {
-                resObjects.forEach(o => {
-                    const date = Date.now()
-                    data.messages.date = o
-                })
-                setData({ ...data })
-            })
+            .then(resObjects => setMessages([...messages, { from: 'me', content: e.target.elements.text.value }, ...resObjects]))
     }
 
     return (
@@ -62,7 +63,7 @@ const Chat = () => {
                         <div className="chat-header__line"></div>
                     </div>
                     <div className="chat-main">
-                        {data?.messages && Object.values(data.messages).map((m, i) => {
+                        {typeof messages === 'object' && messages.map((m, i) => {
                             if (m?.from === 'me') {
                                 return (
                                     <div className="message message--me" key={i}>

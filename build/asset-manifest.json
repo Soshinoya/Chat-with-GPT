@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f08dcd29.css",
+    "main.js": "/static/js/main.7d15b635.js",
+    "static/media/MyriadProRegular.svg": "/static/media/MyriadProRegular.8a6f49d9d62ba52c2fa2.svg",
+    "static/media/SofiaProRegular.svg": "/static/media/SofiaProRegular.06a312958b502a9e5590.svg",
+    "static/media/MyriadProLight.svg": "/static/media/MyriadProLight.1f43f0df9160bcea0e1d.svg",
+    "static/media/abstract-welcome.jpg": "/static/media/abstract-welcome.366a11edbdaf113da665.jpg",
+    "static/media/MyriadProRegular.woff2": "/static/media/MyriadProRegular.57e6b6e50cd45c55e701.woff2",
+    "static/media/MyriadProRegular.eot": "/static/media/MyriadProRegular.c9a7fe9fa0af826a4a94.eot",
+    "static/media/SofiaProRegular.eot": "/static/media/SofiaProRegular.275286dba3b05886899b.eot",
+    "static/media/SofiaProRegular.ttf": "/static/media/SofiaProRegular.452f2da840f8783fd8a2.ttf",
+    "static/media/MyriadProLight.eot": "/static/media/MyriadProLight.e87d154cb221398cd59e.eot",
+    "static/media/MyriadProLight.ttf": "/static/media/MyriadProLight.5ec812ee0ac96077ab9b.ttf",
+    "static/media/SofiaProBold.eot": "/static/media/SofiaProBold.41a99e633a4e961dcdbf.eot",
+    "static/media/SofiaProBold.ttf": "/static/media/SofiaProBold.1ff43b601929bb2e9451.ttf",
+    "static/media/SofiaProMedium.eot": "/static/media/SofiaProMedium.0fd0775f2995ee586b50.eot",
+    "static/media/SofiaProMedium.ttf": "/static/media/SofiaProMedium.ea37b4f5ccd5305e1194.ttf",
+    "static/media/MyriadProRegular.ttf": "/static/media/MyriadProRegular.c59859cec849233be7f8.ttf",
+    "static/media/MyriadProLight.woff2": "/static/media/MyriadProLight.57995383c656c3ea83c4.woff2",
+    "static/media/SofiaProRegular.woff": "/static/media/SofiaProRegular.246cf6ab78b42885baa8.woff",
+    "static/media/MyriadProRegular.woff": "/static/media/MyriadProRegular.cafedb2b7add42b6782d.woff",
+    "static/media/MyriadProLight.woff": "/static/media/MyriadProLight.e60ed51a193437341f03.woff",
+    "static/media/SofiaProMedium.woff": "/static/media/SofiaProMedium.c4e6d42592d5d49c4030.woff",
+    "static/media/SofiaProBold.woff": "/static/media/SofiaProBold.086ed00f3060992f2938.woff",
+    "static/media/SofiaProRegular.woff2": "/static/media/SofiaProRegular.626558ffcb6aecbdec9b.woff2",
+    "static/media/SofiaProMedium.woff2": "/static/media/SofiaProMedium.9c6504c5f5dc77ba26d5.woff2",
+    "static/media/SofiaProBold.woff2": "/static/media/SofiaProBold.1d7186488612ac20891f.woff2",
+    "static/media/setting.svg": "/static/media/setting.f6c2af7345959931660a0fd244d747f6.svg",
+    "index.html": "/index.html",
+    "static/media/paper-plane.svg": "/static/media/paper-plane.e4bd6ef1dea4c0342c2ee1333ca4a642.svg",
+    "main.f08dcd29.css.map": "/static/css/main.f08dcd29.css.map",
+    "main.7d15b635.js.map": "/static/js/main.7d15b635.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f08dcd29.css",
+    "static/js/main.7d15b635.js"
+  ]
+}
