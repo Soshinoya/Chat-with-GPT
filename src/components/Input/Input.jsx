@@ -3,7 +3,7 @@ import useInput from './../../hooks/useInput/useInput'
 
 import styles from './Input.module.css'
 
-const Input = ({ isDisabled, setIsDisabled, type, name, children, required }) => {
+const Input = ({ isDisabled, setIsDisabled, type, name, placeholder, children, isChatInput, required }) => {
     const label = useRef(null)
 
     const { value, onChange } = useInput('')
@@ -13,18 +13,43 @@ const Input = ({ isDisabled, setIsDisabled, type, name, children, required }) =>
 
         const obj = { ...isDisabled }
 
+        const trimmedValue = e.target.value.trim()
+
         switch (name) {
+            case 'name':
+                if (!!trimmedValue) {
+                    obj['name'] = trimmedValue.length <= 30
+                } else {
+                    obj['name'] = false
+                }
+                break;
+            case 'surname':
+                if (!!trimmedValue) {
+                    obj['surname'] = trimmedValue.length <= 30
+                } else {
+                    obj['surname'] = false
+                }
+                break;
             case 'email':
-                if (!!e.target.value.trim()) {
+                if (!!trimmedValue) {
                     obj['email'] = !!reg.test(e.target.value)
+                } else {
+                    obj['email'] = false
                 }
                 break;
             case 'password':
-                if (!!e.target.value.trim()) {
-                    e.target.value.trim().length >= 8
-                    && e.target.value.trim().length <= 16
-                    ? obj['password'] = true
-                    : obj['password'] = false
+                if (!!trimmedValue) {
+                    trimmedValue.length >= 8
+                        && trimmedValue.length <= 16
+                        ? obj['password'] = true
+                        : obj['password'] = false
+                }
+                break;
+            case 'text':
+                if (!!trimmedValue) {
+                    obj['text'] = trimmedValue.length <= 30
+                } else {
+                    obj['text'] = false
                 }
                 break;
             default:
@@ -39,7 +64,7 @@ const Input = ({ isDisabled, setIsDisabled, type, name, children, required }) =>
     const focusHandler = ({ target: value }) => value.value && label.current.classList.remove('d-none')
 
     return (
-        <div className={styles.inputGroup}>
+        <div className={`${styles.inputGroup} ${isChatInput && 'chat-footer__input'}`}>
             <input
                 value={value}
                 onChange={changeHandler}
@@ -48,10 +73,11 @@ const Input = ({ isDisabled, setIsDisabled, type, name, children, required }) =>
                 type={type}
                 name={name}
                 required={required}
+                placeholder={placeholder}
                 className={`auth-form__input ${styles.input}`}
                 autoComplete="off"
             />
-            <label ref={label} className={`auth-form__label ${styles.inputLabel}`}>{children}</label>
+            {children && <label ref={label} className={`auth-form__label ${styles.inputLabel}`}>{children}</label>}
         </div>
     )
 }

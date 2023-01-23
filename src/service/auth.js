@@ -41,15 +41,14 @@ export default class Auth {
     static registerHandler(e) {
         e.preventDefault()
         const { target } = e
-        const name = target.elements.name.value
-        const surname = target.elements.surname.value
-        const email = target.elements.email.value
-        const password = target.elements.password.value
+        let name = target.elements.name.value
+        let surname = target.elements.surname.value
+        let email = target.elements.email.value
+        let password = target.elements.password.value
         // Очистить поля формы после присваивания переменным значений
 
         return createUserWithEmailAndPassword(auth, email, password)
-            .then(({ user }) => user)
-            .then(user => {
+            .then(({ user }) => {
                 const userId = user.reloadUserInfo.localId
                 const db = getDatabase();
                 set(ref(db, 'users/' + userId), {
@@ -57,13 +56,13 @@ export default class Auth {
                     surname,
                     email
                 });
+                target.elements.name.value = ''
+                target.elements.surname.value = ''
+                target.elements.email.value = ''
+                target.elements.password.value = ''
                 return true
             })
-            .catch(error => {
-                const errorMessage = error.message;
-                console.log(errorMessage);
-                return false
-            });
+            .catch(({ code }) => code)
     }
 
 }

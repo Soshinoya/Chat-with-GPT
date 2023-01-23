@@ -10,7 +10,7 @@ export default class ChatService {
                 const db = getDatabase()
                 onValue(ref(db, 'users/' + uid), snapshot => {
                     const data = snapshot.val()
-                    resolve(data.email)
+                    resolve(data)
                 })
             })
         } else {

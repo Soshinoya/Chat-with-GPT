@@ -1,21 +1,23 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import useCustomModal from './../hooks/useCustomModal/useCustomModal'
 import Input from "./Input/Input"
 import Button from "./Button/Button"
 import Auth from "../service/auth"
-import useCustomModal from './../hooks/useCustomModal/useCustomModal'
 
 const Register = () => {
     const [isDisabled, setIsDisabled] = useState({
-        "name": true,
-        "surname": true,
+        "name": false,
+        "surname": false,
         "email": false,
         "password": false
     })
 
     const navigate = useNavigate()
 
-    const modalParams = {
+    const [modal, setModal] = useState({})
+
+    const successModalParams = {
         title: 'Success',
         closable: true,
         content: (
@@ -24,20 +26,41 @@ const Register = () => {
             </div>
         ),
         footerButtons: [
-            {
-                text: 'Ок', afterClick: () => navigate('/login')
-            },
-            {
-                text: 'Cancel', afterClick: 'close'
-            }
+            { text: 'Ок', afterClick: () => navigate('/login') },
+            { text: 'Cancel', afterClick: 'close' }
         ]
     }
 
-    const { modalJSX, modalOpen } = useCustomModal(modalParams)
+    const emailExistsModalParams = {
+        title: 'Try another email',
+        closable: true,
+        content: (
+            <div className="custom-modal">
+                <h2 className="custom-modal__title title">Oops!<br />Email already in use :(</h2>
+            </div>
+        ),
+        footerButtons: [{ text: 'Ок', afterClick: 'close' }]
+    }
+
+    const { modalJSX, modalOpen } = useCustomModal(modal)
 
     const submitHandler = e => {
         Auth.registerHandler(e)
-            .then(res => res && modalOpen())
+            .then(res => {
+                switch (res) {
+                    case true:
+                        setModal(successModalParams)
+                        modalOpen()
+                        break;
+
+                    case ('auth/email-already-in-use'):
+                        setModal(emailExistsModalParams)
+                        modalOpen()
+                        break;
+
+                    default:
+                }
+            })
     }
 
     return (

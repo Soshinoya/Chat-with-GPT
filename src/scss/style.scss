@@ -132,8 +132,8 @@
     padding: 30px;
 
     &__title.title {
-        font-size: 36px;
-        text-align: justify;
+        font-size: 30px;
+        letter-spacing: normal;
         @extend %sofia-400;
     }
 }
@@ -179,6 +179,193 @@ h1.modal-title {
 .modal-close {
     font-size: 44px;
     color: $accent-color;
+}
+
+.chat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $accent-color;
+    min-height: 100vh;
+
+    &__inner {
+        border-radius: 40px;
+        overflow: auto;
+        background-color: $dark-blue-color;
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.chat-header {
+    padding: 20px 65px;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    &__title {
+        color: $white-color;
+        font-size: 20px;
+        line-height: 25px;
+        @extend %sofia-400;
+        margin: 0;
+    }
+
+    &__desc {
+        margin: 0;
+        line-height: 25px;
+        @extend %myriad-300;
+        color: $white-color;
+        opacity: .5;
+    }
+
+    &__icon {
+        cursor: pointer;
+    }
+
+    &__line {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background-color: $blue-color;
+    }
+}
+
+.chat-main {
+    padding: 50px 65px;
+    padding-bottom: 0;
+    flex-grow: 1;
+    overflow-y: scroll;
+    margin-right: 10px;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        width: 50px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, .3);
+        border-radius: 30px;
+    }
+
+    .message {
+        width: 100%;
+        color: $white-color;
+
+        &__inner {
+            display: flex;
+            gap: 10px;
+
+            .message__title {
+                margin-top: 10px;
+            }
+        }
+
+        &__img {
+            height: 40px;
+            width: 40px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 20px;
+            }
+        }
+
+        &__info {
+            width: 100%;
+        }
+
+        &__title {
+            @extend %sofia-400;
+            font-size: 18px;
+            line-height: normal;
+            margin-bottom: 15px;
+        }
+
+        &__text {
+            max-width: calc(100% / 2);
+            width: fit-content;
+            padding: 10px 15px;
+            border: 1px solid $white-color;
+            border-radius: 20px;
+            border-top-left-radius: 0;
+            @extend %myriad-300;
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+
+    .message.message--me {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        color: $accent-color;
+        text-align: right;
+
+        .message__text {
+            border: 1px solid $accent-color;
+            border-top-right-radius: 0;
+            border-top-left-radius: 20px;
+        }
+    }
+}
+
+.chat-footer {
+    padding: 50px 65px;
+
+    &__form {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    &__input {
+        width: 100%;
+    }
+
+    &__btn {
+        width: 70px;
+        height: 70px;
+        @extend %neumorphic-dark-blue-elem;
+    }
+
+    &__img {
+        width: 30px;
+        height: 30px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
 }
 
 @media (max-width: 1200px) {
