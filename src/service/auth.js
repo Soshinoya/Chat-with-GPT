@@ -54,7 +54,10 @@ export default class Auth {
                 set(ref(db, 'users/' + userId), {
                     name,
                     surname,
-                    email
+                    email,
+                    messages: [
+                        { from: 'chat', content: `Welcome to the chat, ${name}!` }
+                    ]
                 });
                 target.elements.name.value = ''
                 target.elements.surname.value = ''

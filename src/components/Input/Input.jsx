@@ -47,7 +47,7 @@ const Input = ({ isDisabled, setIsDisabled, type, name, placeholder, children, i
                 break;
             case 'text':
                 if (!!trimmedValue) {
-                    obj['text'] = trimmedValue.length <= 30
+                    obj['text'] = trimmedValue.length < 256
                 } else {
                     obj['text'] = false
                 }
@@ -77,7 +77,7 @@ const Input = ({ isDisabled, setIsDisabled, type, name, placeholder, children, i
                 className={`auth-form__input ${styles.input}`}
                 autoComplete="off"
             />
-            {children && <label ref={label} className={`auth-form__label ${styles.inputLabel}`}>{children}</label>}
+            {<label ref={label} className={`auth-form__label ${styles.inputLabel}`}>{children}</label>}
         </div>
     )
 }

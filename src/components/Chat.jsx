@@ -14,12 +14,27 @@ const Chat = () => {
         "text": false
     })
 
-    const [data, setData] = useState('')
+    const [data, setData] = useState({})
 
     useEffect(() => {
         // Если в новом браузере открыть страницу /chat выводиться underfined, underfined
         ChatService.getMessages().then(setData)
     }, [])
+
+    const submitHandler = e => {
+        e.preventDefault()
+        const date1 = Date.now()
+        data.messages.date1 = { from: 'me', content: e.target.elements.text.value }
+        setData({ ...data })
+        ChatService.onSubmit(e)
+            .then(resObjects => {
+                resObjects.forEach(o => {
+                    const date = Date.now()
+                    data.messages.date = o
+                })
+                setData({ ...data })
+            })
+    }
 
     return (
         <section className="chat">
@@ -47,32 +62,38 @@ const Chat = () => {
                         <div className="chat-header__line"></div>
                     </div>
                     <div className="chat-main">
-                        <div className="message message--me">
-                            <h4 className="message__title">You</h4>
-                            <div className="message__text">
-                                <p>
-                                    Who are you?
-                                </p>
-                            </div>
-                        </div>
-                        <div className="message">
-                            <div className="message__inner">
-                                <div className="message__img">
-                                    <img src={chatGPTIcon} alt="chatGPT" />
-                                </div>
-                                <div className="message__info">
-                                    <h4 className="message__title">ChatGPT</h4>
-                                    <div className="message__text">
-                                        <p>
-                                            Hello, I`m chat-bot
-                                        </p>
+                        {data?.messages && Object.values(data.messages).map((m, i) => {
+                            if (m?.from === 'me') {
+                                return (
+                                    <div className="message message--me" key={i}>
+                                        <h4 className="message__title">You</h4>
+                                        <div className="message__text">
+                                            <p>
+                                                {m?.content}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            return (
+                                <div className="message" key={i}>
+                                    <div className="message__inner">
+                                        <div className="message__img">
+                                            <img src={chatGPTIcon} alt="chatGPT" />
+                                        </div>
+                                        <div className="message__info">
+                                            <h4 className="message__title">ChatGPT</h4>
+                                            <div className="message__text">
+                                                <p>{m?.content}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            )
+                        })}
                     </div>
                     <div className="chat-footer">
-                        <form className="chat-footer__form">
+                        <form onSubmit={submitHandler} className="chat-footer__form">
                             <Input isDisabled={isDisabled} setIsDisabled={setIsDisabled} type="text" name="text" placeholder="Type a Message" isChatInput required />
                             <Button isDisabled={isDisabled} className="button chat-footer__btn">
                                 <div className="chat-footer__img">
