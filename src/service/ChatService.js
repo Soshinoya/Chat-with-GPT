@@ -17,23 +17,25 @@ export default class ChatService {
             return Promise.resolve(<p class='error'>Error {user?.error}</p>)
         }
     }
-    static onSubmit(e) {
+    static onSubmit(e, userDate) {
         return new Promise(async (resolve, reject) => {
             const userText = e.target.elements.text.value
             const response = await this.getResponseFromGPT(userText)
-            resolve({ response, userText })
+            resolve({ response, userText, userDate })
         })
-            .then(({ response, userText }) => {
+            .then(({ response, userText, userDate }) => {
 
-                const resObjects = response.data.choices.map(o => {
-                    return { from: 'chat', content: o.text }
+                const responseDate = `${new Date().getHours()}:${new Date().getMinutes()}`
+
+                const responseObjects = response.data.choices.map(o => {
+                    return { from: 'chat', content: o.text, date: responseDate }
                 })
 
-                const userMsg = { from: 'me', content: userText }
+                const userMsg = { from: 'me', content: userText, date: userDate }
 
-                this.uploadMessages([userMsg, ...resObjects])
+                this.uploadMessages([userMsg, ...responseObjects])
 
-                return resObjects
+                return responseObjects
 
             })
             .catch(console.log)
@@ -43,7 +45,7 @@ export default class ChatService {
             const { Configuration, OpenAIApi } = require('openai');
 
             const configuration = new Configuration({
-                apiKey: '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',
+                apiKey: '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',
             });
             const openai = new OpenAIApi(configuration);
 
@@ -51,7 +53,7 @@ export default class ChatService {
                 model: 'text-davinci-003',
                 prompt: text,
                 temperature: 0.7,
-                max_tokens: 256,
+                max_tokens: 512,
                 top_p: 1,
                 frequency_penalty: 0,
                 presence_penalty: 0,
@@ -63,10 +65,10 @@ export default class ChatService {
     static uploadMessages(uploadArr) {
         const user = localStorage.getItem('user')
 
-        const parsedUser = JSON.parse(user)
+        const { uid } = JSON.parse(user)
 
         const db = getDatabase();
 
-        uploadArr?.forEach(m => update(ref(db, 'users/' + parsedUser.uid + '/messages/' + Date.now()), m))
+        uploadArr?.forEach(m => update(ref(db, 'users/' + uid + '/messages/' + Date.now()), m))
     }
 }

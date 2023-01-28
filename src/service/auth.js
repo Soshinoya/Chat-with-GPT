@@ -31,11 +31,7 @@ export default class Auth {
                 localStorage.setItem('user', JSON.stringify(user))
                 return true
             })
-            .catch(error => {
-                const errorMessage = error.message;
-                console.log(errorMessage);
-                return false
-            });
+            .catch(({ code }) => code)
     }
 
     static registerHandler(e) {
@@ -56,7 +52,7 @@ export default class Auth {
                     surname,
                     email,
                     messages: [
-                        { from: 'chat', content: `Welcome to the chat, ${name}!` }
+                        { from: 'chat', content: `Welcome to the chat, ${name}!`, date: `${new Date().getHours()}:${new Date().getMinutes()}` }
                     ]
                 });
                 target.elements.name.value = ''

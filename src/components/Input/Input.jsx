@@ -1,10 +1,13 @@
-import { useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import useInput from './../../hooks/useInput/useInput'
+import InputAutoHeight from './InputAutoHeight'
 
 import styles from './Input.module.css'
 
 const Input = ({ isDisabled, setIsDisabled, type, name, placeholder, children, isChatInput, required }) => {
     const label = useRef(null)
+
+    const [input, setInput] = useState(useRef(null))
 
     const { value, onChange } = useInput('')
 
@@ -63,20 +66,37 @@ const Input = ({ isDisabled, setIsDisabled, type, name, placeholder, children, i
 
     const focusHandler = ({ target: value }) => value.value && label.current.classList.remove('d-none')
 
+    useEffect(() => {
+        isChatInput && InputAutoHeight(input)
+    }, [input])
+
     return (
-        <div className={`${styles.inputGroup} ${isChatInput && 'chat-footer__input'}`}>
-            <input
-                value={value}
-                onChange={changeHandler}
-                onBlur={blurHandler}
-                onFocus={focusHandler}
-                type={type}
-                name={name}
-                required={required}
-                placeholder={placeholder}
-                className={`auth-form__input ${styles.input}`}
-                autoComplete="off"
-            />
+        <div className={`${styles.inputGroup} ${isChatInput ? 'chat-footer__input' : ''}`}>
+            {isChatInput
+                ? <textarea
+                    ref={e => setInput(e)}
+                    value={value}
+                    onChange={changeHandler}
+                    onBlur={blurHandler}
+                    onFocus={focusHandler}
+                    type={type}
+                    name={name}
+                    required={required}
+                    placeholder={placeholder}
+                    className={`auth-form__input ${styles.input} chat-footer__input`}
+                ></textarea>
+                : <input
+                    value={value}
+                    onChange={changeHandler}
+                    onBlur={blurHandler}
+                    onFocus={focusHandler}
+                    type={type}
+                    name={name}
+                    required={required}
+                    placeholder={placeholder}
+                    className={`auth-form__input ${styles.input}`}
+                    autoComplete="off"
+                />}
             {<label ref={label} className={`auth-form__label ${styles.inputLabel}`}>{children}</label>}
         </div>
     )

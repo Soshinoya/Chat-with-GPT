@@ -321,6 +321,14 @@ h1.modal-title {
                 margin: 0;
             }
         }
+
+        &__date {
+            color: $white-color;
+            opacity: .5;
+            position: absolute;
+            left: 130px;
+            top: 7px;
+        }
     }
 
     .message.message--me {
@@ -331,9 +339,16 @@ h1.modal-title {
         text-align: right;
 
         .message__text {
+            text-align: left;
             border: 1px solid $accent-color;
             border-top-right-radius: 0;
             border-top-left-radius: 20px;
+        }
+
+        .message__date {
+            left: 0;
+            right: 40px;
+            top: -2px;
         }
     }
 }
@@ -348,7 +363,10 @@ h1.modal-title {
     }
 
     &__input {
+        box-shadow: none;
         width: 100%;
+        overflow-y: hidden;
+        resize: none;
     }
 
     &__btn {

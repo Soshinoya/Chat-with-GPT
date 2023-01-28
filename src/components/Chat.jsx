@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useRef, useState, useEffect } from "react"
 import ChatService from './../service/ChatService'
 
+import TypeAnim from './TypeAnim/TypeAnim'
 import Input from "./Input/Input"
 import Button from "./Button/Button"
 
@@ -9,32 +10,44 @@ import settingIcon from './../images/setting.svg'
 import paperPlane from './../images/paper-plane.svg'
 
 const Chat = () => {
+    const chatMain = useRef(null)
 
-    const [isDisabled, setIsDisabled] = useState({
-        "text": false
-    })
+    const [isDisabled, setIsDisabled] = useState({ "text": false })
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const [data, setData] = useState({})
 
     const [messages, setMessages] = useState([])
 
+    const scrollToBottom = block => {
+        if (block.current === null) return
+        block.current.scrollTop = block.current.scrollHeight
+    }
+
+    useEffect(() => chatMain?.current !== null && scrollToBottom(chatMain), [messages])
+
     useEffect(() => {
         // Если в новом браузере открыть страницу /chat выводиться underfined, underfined
+        setIsLoading(true)
         ChatService.getData()
             .then(data => {
                 setData(data)
                 return data.messages
             })
             .then(messages => messages && setMessages(Object.values(messages)))
-    }, [])
-
-    console.log(messages)
+            .finally(() => setIsLoading(false))
+    }, []);
 
     const submitHandler = e => {
         e.preventDefault()
-        setMessages([...messages, { from: 'me', content: e.target.elements.text.value }])
-        ChatService.onSubmit(e)
-            .then(resObjects => setMessages([...messages, { from: 'me', content: e.target.elements.text.value }, ...resObjects]))
+        const date = `${new Date().getHours()}:${new Date().getMinutes()}`
+        const myMsg = { from: 'me', content: e.target.elements.text.value, date }
+        setMessages([...messages, myMsg])
+        setIsLoading(true)
+        ChatService.onSubmit(e, date)
+            .then(responseObjects => setMessages([...messages, myMsg, ...responseObjects]))
+            .finally(() => setIsLoading(false))
     }
 
     return (
@@ -62,22 +75,21 @@ const Chat = () => {
                         </div>
                         <div className="chat-header__line"></div>
                     </div>
-                    <div className="chat-main">
+                    <div ref={chatMain} className="chat-main">
                         {typeof messages === 'object' && messages.map((m, i) => {
                             if (m?.from === 'me') {
                                 return (
-                                    <div className="message message--me" key={i}>
+                                    <div className="message message--me position-relative" key={i}>
                                         <h4 className="message__title">You</h4>
                                         <div className="message__text">
-                                            <p>
-                                                {m?.content}
-                                            </p>
+                                            <p>{m?.content}</p>
                                         </div>
+                                        <span className="message__date">{m?.date}</span>
                                     </div>
                                 )
                             }
                             return (
-                                <div className="message" key={i}>
+                                <div className="message position-relative" key={i}>
                                     <div className="message__inner">
                                         <div className="message__img">
                                             <img src={chatGPTIcon} alt="chatGPT" />
@@ -87,11 +99,27 @@ const Chat = () => {
                                             <div className="message__text">
                                                 <p>{m?.content}</p>
                                             </div>
+                                            <span className="message__date">{m?.date}</span>
                                         </div>
                                     </div>
                                 </div>
                             )
                         })}
+                        {isLoading && (
+                            <div className="message">
+                                <div className="message__inner">
+                                    <div className="message__img">
+                                        <img src={chatGPTIcon} alt="chatGPT" />
+                                    </div>
+                                    <div className="message__info">
+                                        <h4 className="message__title">ChatGPT</h4>
+                                        <div className="message__text">
+                                            <TypeAnim />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <div className="chat-footer">
                         <form onSubmit={submitHandler} className="chat-footer__form">
