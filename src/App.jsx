@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import MainLayout from './layouts/MainLayout'
@@ -9,6 +10,13 @@ import Chat from './components/Chat'
 import './scss/style.scss'
 
 function App() {
+  useEffect(() => {
+    const arrOfThemes = localStorage.getItem('theme')
+    if (!arrOfThemes) return
+    const html = document.querySelector('html')
+    JSON.parse(arrOfThemes).forEach(([priority, color]) => html.dataset[priority] = color)
+  }, [])
+
   return (
     <BrowserRouter>
       <div className='App'>

@@ -1,8 +1,96 @@
-$accent-color: #FBB829;
-$blue-color: #2E3A51;
-$dark-blue-color: #26303F;
-$black-color: #000;
-$white-color: #fff;
+// $accent-color: #FBB829;
+// $blue-color: #2E3A51;
+// $dark-blue-color: #26303F;
+// $black-color: #282828;
+// $white-color: #F6F7F9;
+
+:root {
+    --white-color: #F6F7F9;
+    --black-color: #282828;
+    --accent-color: #FBB829;
+    --blue-color: #2E3A51;
+    --dark-blue-color: #26303F;
+}
+
+///////////////////////////////////////// First
+
+:root[data-theme-first="purple"] {
+    --accent-color: #945AD2;
+}
+
+:root[data-theme-first="yellow"] {
+    --accent-color: #FBB829;
+}
+
+:root[data-theme-first="green"] {
+    --accent-color: #29B200;
+}
+
+:root[data-theme-first="tg-blue"] {
+    --accent-color: #34A7FC;
+}
+
+///////////////////////////////////////// Second
+
+:root[data-theme-second="white"] {
+    --blue-color: #F6F7F9;
+}
+
+:root[data-theme-second="black"] {
+    --blue-color: #282828;
+}
+
+:root[data-theme-second="blue"] {
+    --blue-color: #2E3A51;
+}
+
+:root[data-theme-second="dark-blue"] {
+    --blue-color: #26303F;
+}
+
+:root[data-theme-second="gray"] {
+    --blue-color: #363636;
+}
+
+:root[data-theme-second="dark-green"] {
+    --blue-color: #111B21;
+}
+
+///////////////////////////////////////// Third
+
+:root[data-theme-third="white"] {
+    --dark-blue-color: #F6F7F9;
+}
+
+:root[data-theme-third="black"] {
+    --dark-blue-color: #282828;
+}
+
+:root[data-theme-third="blue"] {
+    --dark-blue-color: #2E3A51;
+}
+
+:root[data-theme-third="dark-blue"] {
+    --dark-blue-color: #26303F;
+}
+
+:root[data-theme-third="gray"] {
+    --dark-blue-color: #363636;
+}
+
+:root[data-theme-third="dark-green"] {
+    --dark-blue-color: #111B21;
+}
+
+///////////////////////////////////////// Additional
+
+:root[data-theme-additional="white"] {
+    --white-color: #F6F7F9;
+}
+
+:root[data-theme-additional="black"] {
+    --white-color: #282828;
+}
 
 %myriad-300 {
     font-family: 'Myriad Pro';

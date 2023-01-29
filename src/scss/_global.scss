@@ -10,7 +10,7 @@ body {
 body {
     font-size: 18px;
     line-height: 25px;
-    color: $white-color;
+    color: var(--white-color);
     @extend %myriad-300;
     display: flex;
     flex-direction: column;
@@ -29,7 +29,7 @@ body {
 .title {
     @extend %sofia-500;
     letter-spacing: -0.05em;
-    color: $accent-color;
+    color: var(--accent-color);
 }
 
 h1 {
@@ -40,7 +40,7 @@ h1 {
 .link {
     font-size: 22px;
     text-decoration: none;
-    color: $blue-color;
+    color: var(--blue-color);
 }
 
 .button {
@@ -48,19 +48,19 @@ h1 {
     text-align: center;
     width: 100%;
     border-radius: 30px;
-    background-color: $blue-color;
-    color: $accent-color;
+    background-color: var(--blue-color);
+    color: var(--accent-color);
     @extend %sofia-400;
     font-size: 28px;
     border: none;
 
     &--main {
-        background-color: $accent-color;
-        color: $blue-color;
+        background-color: var(--accent-color);
+        color: var(--blue-color);
     }
 
     &::before {
-        background-color: $white-color;
+        background-color: var(--white-color);
     }
 
     &:disabled {
@@ -68,7 +68,7 @@ h1 {
     }
 
     &:not(:disabled):hover {
-        color: $dark-blue-color;
+        color: var(--dark-blue-color);
 
         &::before {
             width: 100%;

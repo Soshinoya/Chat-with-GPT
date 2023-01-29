@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $accent-color;
+    background-color: var(--accent-color);
     min-height: 100vh;
 
     .container {
@@ -38,7 +38,7 @@
 }
 
 .greeting-info {
-    background-color: $blue-color;
+    background-color: var(--blue-color);
     @extend %neumorphic-dark-blue;
     z-index: 10;
     padding: 40px;
@@ -79,7 +79,7 @@
 
 .auth-block {
     padding: 80px 40px;
-    background-color: $dark-blue-color;
+    background-color: var(--dark-blue-color);
     display: flex;
     flex-direction: column;
 }
@@ -94,17 +94,17 @@
     }
 
     &__input {
-        color: $white-color;
-        background-color: $blue-color;
+        color: var(--white-color);
+        background-color: var(--blue-color);
     }
 
     &__input:focus {
-        border: 1.5px solid $accent-color;
+        border: 1.5px solid var(--accent-color);
     }
 
     &__input:focus~label,
     &__input:valid~label {
-        color: $accent-color;
+        color: var(--accent-color);
     }
 
     &__label {
@@ -145,14 +145,14 @@
     width: 100%;
     height: 80%;
     border-radius: 40px;
-    border: 5px solid $black-color;
-    background-color: $dark-blue-color;
+    border: 5px solid var(--black-color);
+    background-color: var(--dark-blue-color);
     padding: 30px;
 }
 
 .modal-header {
     padding: 30px;
-    border-bottom: 5px solid $black-color;
+    border-bottom: 5px solid var(--black-color);
 }
 
 .modal-footer {
@@ -160,17 +160,17 @@
 }
 
 h1.modal-title {
-    color: $accent-color;
+    color: var(--accent-color);
     font-size: 44px;
     @extend %sofia-400;
 }
 
 .modal-button {
-    background-color: $accent-color;
+    background-color: var(--accent-color);
     max-width: 150px;
     width: 100%;
-    color: $black-color;
-    border: 5px solid $black-color;
+    color: var(--black-color);
+    border: 5px solid var(--black-color);
     padding: 15px 0;
     font-size: 22px;
     @extend %sofia-700;
@@ -178,20 +178,21 @@ h1.modal-title {
 
 .modal-close {
     font-size: 44px;
-    color: $accent-color;
+    color: var(--accent-color);
 }
 
 .chat {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $accent-color;
+    background-color: var(--accent-color);
     min-height: 100vh;
 
     &__inner {
+        border: 1px solid var(--black-color);
         border-radius: 40px;
         overflow: auto;
-        background-color: $dark-blue-color;
+        background-color: var(--dark-blue-color);
         height: 90vh;
         display: flex;
         flex-direction: column;
@@ -199,12 +200,10 @@ h1.modal-title {
 }
 
 .chat-header {
-    padding: 20px 65px;
+    padding: 20px;
+    min-height: 100px;
 
     &__inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         gap: 30px;
     }
 
@@ -221,7 +220,7 @@ h1.modal-title {
     }
 
     &__title {
-        color: $white-color;
+        color: var(--white-color);
         font-size: 20px;
         line-height: 25px;
         @extend %sofia-400;
@@ -232,12 +231,28 @@ h1.modal-title {
         margin: 0;
         line-height: 25px;
         @extend %myriad-300;
-        color: $white-color;
-        opacity: .5;
+        color: var(--accent-color);
+    }
+
+    &__img {
+        img {
+            border-radius: 50%;
+        }
     }
 
     &__icon {
         cursor: pointer;
+        transition: transform 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+
+        svg {
+            path {
+                stroke: var(--white-color);
+            }
+        }
+
+        &--active {
+            transform: rotate(90deg);
+        }
     }
 
     &__line {
@@ -246,7 +261,7 @@ h1.modal-title {
         left: 0;
         width: 100%;
         height: 5px;
-        background-color: $blue-color;
+        background-color: var(--accent-color);
     }
 }
 
@@ -273,7 +288,7 @@ h1.modal-title {
 
     .message {
         width: 100%;
-        color: $white-color;
+        color: var(--white-color);
         margin-bottom: 30px;
 
         &__inner {
@@ -312,10 +327,11 @@ h1.modal-title {
             max-width: calc(100% / 2);
             width: fit-content;
             padding: 10px 15px;
-            border: 1px solid $white-color;
+            border: 1px solid var(--white-color);
             border-radius: 20px;
             border-top-left-radius: 0;
             @extend %myriad-300;
+            background-color: rgb(0, 0, 0, 0.1);
 
             p {
                 margin: 0;
@@ -323,7 +339,7 @@ h1.modal-title {
         }
 
         &__date {
-            color: $white-color;
+            color: var(--white-color);
             opacity: .5;
             position: absolute;
             left: 130px;
@@ -335,12 +351,12 @@ h1.modal-title {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        color: $accent-color;
+        color: var(--accent-color);
         text-align: right;
 
         .message__text {
             text-align: left;
-            border: 1px solid $accent-color;
+            border: 1px solid var(--accent-color);
             border-top-right-radius: 0;
             border-top-left-radius: 20px;
         }
@@ -354,7 +370,7 @@ h1.modal-title {
 }
 
 .chat-footer {
-    padding: 50px 65px;
+    padding: 20px;
 
     &__form {
         display: flex;
@@ -373,16 +389,248 @@ h1.modal-title {
         width: 70px;
         height: 70px;
         @extend %neumorphic-dark-blue-elem;
+        box-shadow: none;
     }
 
     &__img {
         width: 30px;
         height: 30px;
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        svg {
+            path {
+                stroke: var(--accent-color);
+            }
+        }
+    }
+}
+
+.settings {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: var(--dark-blue-color);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        width: 50px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, .3);
+        border-radius: 30px;
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px 65px;
+    }
+}
+
+.settings-item {
+    border: 1px solid var(--white-color);
+    border-radius: 10px;
+    padding: 15px;
+    transition: border-color 0.3s ease;
+
+    cursor: pointer;
+
+    &--active {
+        border: 1px solid var(--accent-color);
+
+        & .settings-item__title {
+            color: var(--accent-color);
+        }
+    }
+
+    &__title {
+        font-size: 22px;
+        line-height: normal;
+        @extend %sofia-400;
+        margin: 0;
+        transition: color 0.3s ease;
+    }
+
+    &__content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    &__content-row {
+        gap: 20px;
+        margin: 20px 0 20px 20px;
+
+        &__title {
+            font-size: 18px;
+            line-height: normal;
+            @extend %sofia-400;
+            margin: 0;
+        }
+
+        &__colors {
+            gap: 15px;
+        }
+
+        &__color {
+            width: 35px;
+            height: 35px;
+            border: 1px solid var(--white-color);
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            &.color-yellow {
+                background-color: #FBB829;
+            }
+
+            &.color-purple {
+                background-color: #945AD2;
+            }
+
+            &.color-blue {
+                background-color: #2E3A51;
+            }
+
+            &.color-dark-blue {
+                background-color: #26303F;
+            }
+
+            &.color-gray {
+                background-color: #363636;
+            }
+
+            &.color-dark-green {
+                background-color: #111B21;
+            }
+
+            &.color-green {
+                background-color: #29B200;
+            }
+
+            &.color-tg-blue {
+                background-color: #34A7FC;
+            }
+
+            &.color-white {
+                background-color: #fff;
+            }
+
+            &.color-black {
+                background-color: #000;
+            }
+
+            &.duo-colors {
+                position: relative;
+                overflow: hidden;
+
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    width: 50%;
+                    height: 100%;
+                    top: 0;
+                }
+
+                &::before {
+                    left: 0;
+                }
+
+                &::after {
+                    right: 0;
+                }
+            }
+
+            &.duo-purple-white {
+                &::before {
+                    background-color: #fff;
+                }
+
+                &::after {
+                    background-color: #945AD2;
+                }
+            }
+            &.duo-purple-blue {
+                &::before {
+                    background-color: #2E3A51;
+                }
+
+                &::after {
+                    background-color: #945AD2;
+                }
+            }
+
+            &.duo-yellow-white {
+                &::before {
+                    background-color: #fff;
+                }
+
+                &::after {
+                    background-color: #FBB829;
+                }
+            }
+            &.duo-yellow-blue {
+                &::before {
+                    background-color: #2E3A51;
+                }
+
+                &::after {
+                    background-color: #FBB829;
+                }
+            }
+
+            &.duo-green-white {
+                &::before {
+                    background-color: #fff;
+                }
+
+                &::after {
+                    background-color: #29B200;
+                }
+            }
+            &.duo-green-black {
+                &::before {
+                    background-color: #111B21;
+                }
+
+                &::after {
+                    background-color: #29B200;
+                }
+            }
+
+            &.duo-tg-blue-black {
+                &::before {
+                    background-color: #363636;
+                }
+
+                &::after {
+                    background-color: #34A7FC;
+                }
+            }
+        }
+
+        &__btn {
+            max-width: fit-content;
+            font-size: 18px;
+            padding: 5px 20px;
+
+            &::before {
+                content: none;
+            }
+
+            &:not(:disabled):hover {
+                color: var(--accent-color);
+            }
         }
     }
 }
@@ -449,7 +697,8 @@ h1.modal-title {
 
     .chat-header,
     .chat-main,
-    .chat-footer {
+    .chat-footer,
+    .settings__inner {
         padding: 10px;
     }
 }
