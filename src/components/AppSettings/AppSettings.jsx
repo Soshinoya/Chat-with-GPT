@@ -1,7 +1,12 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import ChatService from "../../service/ChatService"
 import Button from "../Button/Button"
+import Input from "../Input/Input"
 
 const AppSettings = () => {
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -39,6 +44,25 @@ const AppSettings = () => {
         const htmlThemeAttr = ["data-theme-first", "data-theme-second", "data-theme-third", "data-theme-additional"]
         htmlThemeAttr.forEach(a => html.removeAttribute(a))
         localStorage.removeItem("theme")
+    }
+
+    const [isDisabled, setIsDisabled] = useState({ "text": false })
+
+    const onSubmitHandler = e => {
+        e.preventDefault()
+        setIsLoading(true)
+        ChatService.uploadApiKey(e)
+            .then(ChatService.setApiKey)
+            .catch(console.log)
+            .finally(() => setIsLoading(false))
+    }
+
+    const resetKeyHandler = e => {
+        setIsLoading(true)
+        ChatService.getApiKeyFromDB(true)
+            .then(ChatService.setApiKey)
+            .catch(console.log)
+            .finally(() => setIsLoading(false))
     }
 
     return (
@@ -138,6 +162,29 @@ const AppSettings = () => {
                     </div>
                 </div>
                 <div className="settings-item" onClick={itemClickHandler}>
+                    <h3 className="settings-item__title">Enter your API key</h3>
+                </div>
+                <div className="settings-item__content">
+                    <div className="settings-item__content-wrapper">
+                        <p className="settings-item__content-wrapper__text">
+                            Below, insert your API key generated on the OpenAI website. This key will be used as access to the OpenAI chatbot. If you don't understand what this key is for, it's better not to touch it
+                        </p>
+                        <form className="settings-item__content-form" onSubmit={onSubmitHandler}>
+                            <Input className="settings-item__content-form__input" isDisabled={isDisabled} setIsDisabled={setIsDisabled} type="text" name="text" required>
+                                Paste your key here
+                            </Input>
+                            <div className="settings-item__content-form__btns d-flex align-items-center justify-content-between">
+                                <Button className="settings-item__content-form__btn d-flex align-items-center justify-content-center button--main" isDisabled={isDisabled}>
+                                    Confirm
+                                </Button>
+                                <Button type="button" className="settings-item__content-form__btn d-flex align-items-center justify-content-center" onClick={resetKeyHandler}>
+                                    Reset
+                                </Button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div className="settings-item" onClick={itemClickHandler}>
                     <h3 className="settings-item__title">Leave</h3>
                 </div>
                 <div className="settings-item__content">
@@ -153,6 +200,11 @@ const AppSettings = () => {
                     </div>
                 </div>
             </div>
+            {isLoading && (
+                <div className="modal-overlay" style={{ background: 'rgba(0, 0, 0, .5)', zIndex: 2, opacity: 1 }}>
+                    <h1 className="d-flex align-items-center justify-content-center">Loading...</h1>
+                </div>
+            )}
         </div>
     )
 }

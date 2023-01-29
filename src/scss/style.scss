@@ -163,6 +163,7 @@ h1.modal-title {
     color: var(--accent-color);
     font-size: 44px;
     @extend %sofia-400;
+    line-height: normal;
 }
 
 .modal-button {
@@ -641,6 +642,43 @@ h1.modal-title {
             &:not(:disabled):hover {
                 color: var(--accent-color);
             }
+        }
+    }
+
+    &__content-wrapper {
+        padding: 20px;
+
+        &__text {
+            margin-bottom: 30px;
+            opacity: .5;
+            @extend %myriad-300;
+            font-size: 20px;
+        }
+    }
+
+    &__content-form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        &__input {
+            box-shadow: none;
+            padding: 10px 20px;
+            font-size: 22px;
+            height: 50px;
+            @extend %myriad-300;
+        }
+
+        .auth-form__label {
+            font-size: 22px;
+        }
+
+        &__btn {
+            padding: 15px 35px;
+            height: 50px;
+            @extend %sofia-700;
+            font-size: 20px;
+            width: fit-content;
         }
     }
 }

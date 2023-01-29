@@ -4,7 +4,7 @@ import InputAutoHeight from './InputAutoHeight'
 
 import styles from './Input.module.css'
 
-const Input = ({ isDisabled, setIsDisabled, type, name, placeholder, children, isChatInput, required }) => {
+const Input = ({ className, isDisabled, setIsDisabled, type, name, placeholder, children, isChatInput, required }) => {
     const label = useRef(null)
 
     const [input, setInput] = useState(useRef(null))
@@ -83,7 +83,7 @@ const Input = ({ isDisabled, setIsDisabled, type, name, placeholder, children, i
                     name={name}
                     required={required}
                     placeholder={placeholder}
-                    className={`auth-form__input ${styles.input} chat-footer__input`}
+                    className={`auth-form__input ${styles.input} chat-footer__input ${className}`}
                 ></textarea>
                 : <input
                     value={value}
@@ -94,7 +94,7 @@ const Input = ({ isDisabled, setIsDisabled, type, name, placeholder, children, i
                     name={name}
                     required={required}
                     placeholder={placeholder}
-                    className={`auth-form__input ${styles.input}`}
+                    className={`auth-form__input ${styles.input} ${className}`}
                     autoComplete="off"
                 />}
             {<label ref={label} className={`auth-form__label ${styles.inputLabel}`}>{children}</label>}

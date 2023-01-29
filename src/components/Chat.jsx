@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react"
 import ChatService from './../service/ChatService'
 
+import useCustomModal from "../hooks/useCustomModal/useCustomModal"
+
 import TypeAnim from './TypeAnim/TypeAnim'
 import Input from "./Input/Input"
 import Button from "./Button/Button"
@@ -9,6 +11,10 @@ import AppSettings from "./AppSettings/AppSettings"
 import chatGPTIcon from './../images/chatGPT-icon.png'
 
 const Chat = () => {
+
+    const [modal, setModal] = useState({})
+
+    const { modalJSX, modalOpen } = useCustomModal(modal)
 
     const [settingsOpen, setSettingsOpen] = useState(false)
 
@@ -29,6 +35,17 @@ const Chat = () => {
         block.current.scrollTop = block.current.scrollHeight
     }
 
+    const incorrectApiKeyModalParams = {
+        title: 'Incorrect OpenAI Api Key',
+        closable: true,
+        content: (
+            <div className="custom-modal">
+                <h2 className="custom-modal__title title">Oops!<br />Try to change or reset api key in settings</h2>
+            </div>
+        ),
+        footerButtons: [{ text: 'Ок', afterClick: 'close' }]
+    }
+
     useEffect(() => chatMain && scrollToBottom(chatMain), [messages])
 
     useEffect(() => {
@@ -40,6 +57,8 @@ const Chat = () => {
                 return data.messages
             })
             .then(messages => messages && setMessages(Object.values(messages)))
+            .then(ChatService.getApiKeyFromDB)
+            .then(ChatService.setApiKey)
             .finally(() => setIsLoading(false))
     }, []);
 
@@ -51,6 +70,20 @@ const Chat = () => {
         setIsLoading(true)
         ChatService.onSubmit(e, date)
             .then(responseObjects => setMessages([...messages, myMsg, ...responseObjects]))
+            .catch(err => {
+                if (typeof err === 'number') {
+                    switch (err) {
+                        case 401:
+                            setModal(incorrectApiKeyModalParams)
+                            modalOpen()
+                            break;
+
+                        default:
+                            console.log(err);
+                            break;
+                    }
+                } else console.log(err)
+            })
             .finally(() => setIsLoading(false))
     }
 
@@ -150,6 +183,7 @@ const Chat = () => {
                     {settingsOpen && <AppSettings />}
                 </div>
             </div>
+            {modalJSX}
         </section>
     )
 }
