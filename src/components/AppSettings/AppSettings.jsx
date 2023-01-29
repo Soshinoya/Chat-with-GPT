@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom"
 import Button from "../Button/Button"
 
 const AppSettings = () => {
+
+    const navigate = useNavigate()
+
     const itemClickHandler = e => {
         const current = e.target.closest(".settings-item")
         const currentContent = current.nextSibling
@@ -12,6 +16,11 @@ const AppSettings = () => {
         } else {
             currentContent.style.maxHeight = 0
         }
+    }
+
+    const logOutHandler = () => {
+        localStorage.removeItem('user')
+        navigate('/')
     }
 
     const switchTheme = (priority = "", color = "", entriesArr) => {
@@ -126,6 +135,21 @@ const AppSettings = () => {
                     </div>
                     <div className="settings-item__content-row d-flex align-items-center">
                         <Button className="settings-item__content-row__btn" onClick={resetTheme}>Reset</Button>
+                    </div>
+                </div>
+                <div className="settings-item" onClick={itemClickHandler}>
+                    <h3 className="settings-item__title">Leave</h3>
+                </div>
+                <div className="settings-item__content">
+                    <div className="settings-item__content-inner d-flex align-items-center" onClick={logOutHandler}>
+                        <h4 className="settings-item__content-row__title">
+                            Log out of your account and go to the main page
+                        </h4>
+                        <div className="settings-item__content-icon">
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.125 9.45005C11.5125 4.95005 13.825 3.11255 18.8875 3.11255H19.05C24.6375 3.11255 26.875 5.35005 26.875 10.9375V19.0875C26.875 24.675 24.6375 26.9125 19.05 26.9125H18.8875C13.8625 26.9125 11.55 25.1001 11.1375 20.6751M18.75 15H4.525M7.3125 10.8125L3.125 15L7.3125 19.1875" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>

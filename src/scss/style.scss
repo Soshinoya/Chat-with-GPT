@@ -262,6 +262,7 @@ h1.modal-title {
         width: 100%;
         height: 5px;
         background-color: var(--accent-color);
+        z-index: 1;
     }
 }
 
@@ -466,6 +467,12 @@ h1.modal-title {
         transition: max-height 0.3s ease;
     }
 
+    &__content-inner {
+        padding: 20px;
+        gap: 10px;
+        cursor: pointer;
+    }
+
     &__content-row {
         gap: 20px;
         margin: 20px 0 20px 20px;
@@ -560,6 +567,7 @@ h1.modal-title {
                     background-color: #945AD2;
                 }
             }
+
             &.duo-purple-blue {
                 &::before {
                     background-color: #2E3A51;
@@ -579,6 +587,7 @@ h1.modal-title {
                     background-color: #FBB829;
                 }
             }
+
             &.duo-yellow-blue {
                 &::before {
                     background-color: #2E3A51;
@@ -598,6 +607,7 @@ h1.modal-title {
                     background-color: #29B200;
                 }
             }
+
             &.duo-green-black {
                 &::before {
                     background-color: #111B21;
