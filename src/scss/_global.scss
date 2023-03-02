@@ -20,12 +20,6 @@ body {
     }
 }
 
-// .container {
-//     max-width: 1770px;
-//     margin: 0 auto;
-//     padding: 0 15px;
-// }
-
 .title {
     @extend %sofia-500;
     letter-spacing: -0.05em;
@@ -84,6 +78,13 @@ h1 {
     font-size: 36px;
     color: red;
     @extend %sofia-700;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 18px;
+    font-family: "Myriad Pro";
 }
 
 @media (max-width: 768px) {

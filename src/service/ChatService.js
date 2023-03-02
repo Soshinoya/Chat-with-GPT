@@ -24,8 +24,13 @@ export default class ChatService {
         return new Promise(async (resolve, reject) => {
             const userText = e.target.elements.text.value
             try {
-                const response = await this.getResponseFromGPT(userText)
-                resolve({ response, userText, userDate })
+                this.getData()
+                    .then(async data => {
+                        return await this.getResponseFromGPT(userText, data)
+                    })
+                    .then(response => {
+                        resolve({ response, userText, userDate })
+                    })
             } catch (error) {
                 reject(error)
             }
@@ -34,21 +39,25 @@ export default class ChatService {
 
                 const responseDate = `${new Date().getHours()}:${new Date().getMinutes()}`
 
-                const responseObjects = response.data.choices.map(o => {
-                    return { from: 'chat', content: o.text, date: responseDate }
-                })
+                const responseObject = { ...response.data.choices[0].message, date: responseDate }
 
-                const userMsg = { from: 'me', content: userText, date: userDate }
+                const userMsg = { role: 'user', content: userText, date: userDate }
 
-                this.uploadMessages([userMsg, ...responseObjects])
+                this.uploadMessages([userMsg, responseObject])
 
-                return responseObjects
+                return responseObject
 
             })
     }
 
-    static getResponseFromGPT(text) {
+    static getResponseFromGPT(text, messagesFromDB) {
         return new Promise(async (resolve, reject) => {
+            messagesFromDB.messages
+            ? Object.values(messagesFromDB.messages).forEach(msg => delete msg?.date)
+            : messagesFromDB.messages = {}
+
+            messagesFromDB.messages[Date.now()] = { role: 'user', content: text }
+
             const { Configuration, OpenAIApi } = require('openai');
 
             const configuration = new Configuration({
@@ -58,14 +67,9 @@ export default class ChatService {
             const openai = new OpenAIApi(configuration);
 
             try {
-                const response = await openai.createCompletion({
-                    model: 'text-davinci-003',
-                    prompt: text,
-                    temperature: 0.7,
-                    max_tokens: 512,
-                    top_p: 1,
-                    frequency_penalty: 0,
-                    presence_penalty: 0,
+                const response = await openai.createChatCompletion({
+                    model: "gpt-3.5-turbo",
+                    messages: Object.values(messagesFromDB.messages)
                 })
                 resolve(response)
             } catch (err) {

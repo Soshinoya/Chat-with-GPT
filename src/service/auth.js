@@ -52,7 +52,7 @@ export default class Auth {
                     surname,
                     email,
                     messages: [
-                        { from: 'chat', content: `Welcome to the chat, ${name}!`, date: `${new Date().getHours()}:${new Date().getMinutes()}` }
+                        { role: 'assistant', content: `Welcome to the chat, ${name}!`, date: `${new Date().getHours()}:${new Date().getMinutes()}` }
                     ]
                 });
                 target.elements.name.value = ''

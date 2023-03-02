@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react"
+
 import ChatService from './../service/ChatService'
 
 import useCustomModal from "../hooks/useCustomModal/useCustomModal"
@@ -65,11 +66,11 @@ const Chat = () => {
     const submitHandler = e => {
         e.preventDefault()
         const date = `${new Date().getHours()}:${new Date().getMinutes()}`
-        const myMsg = { from: 'me', content: e.target.elements.text.value, date }
+        const myMsg = { role: 'user', content: e.target.elements.text.value, date }
         setMessages([...messages, myMsg])
         setIsLoading(true)
         ChatService.onSubmit(e, date)
-            .then(responseObjects => setMessages([...messages, myMsg, ...responseObjects]))
+            .then(responseObject => setMessages([...messages, myMsg, responseObject]))
             .catch(err => {
                 if (typeof err === 'number') {
                     switch (err) {
@@ -123,7 +124,7 @@ const Chat = () => {
                     </div>
                     <div ref={chatMain} className="chat-main">
                         {typeof messages === 'object' && messages.map((m, i) => {
-                            if (m?.from === 'me') {
+                            if (m?.role === 'user') {
                                 return (
                                     <div className="message message--me position-relative" key={i}>
                                         <h4 className="message__title">You</h4>
@@ -143,7 +144,9 @@ const Chat = () => {
                                         <div className="message__info">
                                             <h4 className="message__title">ChatGPT</h4>
                                             <div className="message__text">
-                                                <p>{m?.content}</p>
+                                                <pre>
+                                                    {m.content.replace(/(```)[\s\S]*?\1/g, match => match.replace(/```/g, ""))}
+                                                </pre>
                                             </div>
                                             <span className="message__date">{m?.date}</span>
                                         </div>
