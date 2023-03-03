@@ -53,10 +53,17 @@ export default class ChatService {
     static getResponseFromGPT(text, messagesFromDB) {
         return new Promise(async (resolve, reject) => {
             messagesFromDB.messages
-            ? Object.values(messagesFromDB.messages).forEach(msg => delete msg?.date)
-            : messagesFromDB.messages = {}
+                ? Object.values(messagesFromDB.messages).forEach(msg => delete msg?.date)
+                : messagesFromDB.messages = {}
 
             messagesFromDB.messages[Date.now()] = { role: 'user', content: text }
+
+            let msg = Object.entries(messagesFromDB.messages)
+
+            while (msg.length > 17) {
+                messagesFromDB.messages = Object.assign(...msg.slice(1, msg.length).map(([key, val]) => ({ [key]: val })))
+                msg = Object.entries(messagesFromDB.messages)
+            }
 
             const { Configuration, OpenAIApi } = require('openai');
 

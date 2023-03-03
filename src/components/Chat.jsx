@@ -145,7 +145,7 @@ const Chat = () => {
                                             <h4 className="message__title">ChatGPT</h4>
                                             <div className="message__text">
                                                 <pre>
-                                                    {m.content.replace(/(```)[\s\S]*?\1/g, match => match.replace(/```/g, ""))}
+                                                    {m.content = m.content.replace(/(```)[\s\S]*?\1/g, match => match.replace(/```/g, "")).trim()}
                                                 </pre>
                                             </div>
                                             <span className="message__date">{m?.date}</span>
